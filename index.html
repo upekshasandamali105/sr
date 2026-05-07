@@ -1,174 +1,132 @@
-# Personal Profile Website (HTML Code)
-
-```html
 <!DOCTYPE html>
-<html lang="si">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sandaruwan Computer</title>
+<title>Quiz App</title>
 
 <style>
 body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:#f2f2f2;
+font-family:Arial;
+background:#f2f2f2;
+padding:20px;
 }
 
-header{
-    background:#0f172a;
-    color:white;
-    text-align:center;
-    padding:40px 20px;
-}
-
-header h1{
-    margin:0;
-    font-size:40px;
-}
-
-header p{
-    margin-top:10px;
-    font-size:18px;
-    color:#cbd5e1;
-}
-
-.container{
-    max-width:1000px;
-    margin:auto;
-    padding:20px;
-}
-
-.card{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    margin-bottom:20px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-}
-
-h2{
-    color:#0f172a;
-}
-
-.skills span{
-    display:inline-block;
-    background:#2563eb;
-    color:white;
-    padding:8px 15px;
-    border-radius:20px;
-    margin:5px;
-}
-
-.contact a{
-    text-decoration:none;
-    color:#2563eb;
-    font-weight:bold;
-}
-
-footer{
-    background:#0f172a;
-    color:white;
-    text-align:center;
-    padding:15px;
-    margin-top:30px;
+.quiz-box{
+background:white;
+padding:20px;
+max-width:500px;
+margin:auto;
+border-radius:10px;
 }
 
 button{
-    background:#2563eb;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:16px;
+display:block;
+margin:10px 0;
+padding:10px;
+width:100%;
+cursor:pointer;
 }
 
-button:hover{
-    background:#1d4ed8;
+#nextBtn{
+background:blue;
+color:white;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Sandaruwan Computer</h1>
-    <p>Social Media Promotion | Tech Services | Creative Content</p>
-</header>
+<div class="quiz-box">
 
-<div class="container">
+<h2 id="question">Question Here</h2>
 
-    <div class="card">
-        <h2>මා ගැන</h2>
-        <p>
-            ආයුබෝවන්! මම Thimira. 
-            Sandaruwan Computer යන නමින් තාක්ෂණික සහ සමාජ මාධ්‍ය සේවා සපයනවා. 
-            Social Media Promotion, Creative Content සහ Digital වැඩ වලට විශේෂ උනන්දුවක් තියෙනවා.
-        </p>
-    </div>
+<div id="answers"></div>
 
-    <div class="card">
-        <h2>මගේ සේවාවන්</h2>
-        <ul>
-            <li>Social Media Promotion</li>
-            <li>Facebook Page Management</li>
-            <li>Video & Image Editing</li>
-            <li>Quiz Website Creation</li>
-            <li>Computer Related Services</li>
-        </ul>
-    </div>
-
-    <div class="card">
-        <h2>Skills</h2>
-
-        <div class="skills">
-            <span>HTML</span>
-            <span>JavaScript</span>
-            <span>Facebook Marketing</span>
-            <span>Video Editing</span>
-            <span>Content Creation</span>
-        </div>
-    </div>
-
-    <div class="card contact">
-        <h2>Contact</h2>
-
-        <p>Email: yourmail@example.com</p>
-        <p>Phone: 07XXXXXXXX</p>
-        <p>Facebook: <a href="#">Your Facebook Link</a></p>
-
-        <br>
-
-        <button onclick="showMessage()">Click Me</button>
-    </div>
+<button id="nextBtn">Next</button>
 
 </div>
 
-<footer>
-    © 2026 Sandaruwan Computer | All Rights Reserved
-</footer>
-
 <script>
-function showMessage(){
-    alert("Thanks for visiting my website!");
+
+const quiz = [
+
+{
+question:"ශ්‍රී ලංකාවේ අගනුවර කුමක්ද?",
+answers:["කොළඹ","මහනුවර","ගාල්ල","යාපනය"],
+correct:0
+},
+
+{
+question:"2 + 2 = ?",
+answers:["3","4","5","6"],
+correct:1
+},
+
+{
+question:"ලෝකයේ විශාලතම සාගරය?",
+answers:["ඉන්දීය","අත්ලාන්තික්","පැසිෆික්","ආක්ටික්"],
+correct:2
 }
+
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const nextBtn = document.getElementById("nextBtn");
+
+function loadQuestion(){
+
+answersEl.innerHTML="";
+
+let q = quiz[currentQuestion];
+
+questionEl.innerText = q.question;
+
+q.answers.forEach((answer,index)=>{
+
+let btn = document.createElement("button");
+
+btn.innerText = answer;
+
+btn.onclick = ()=>{
+
+if(index === q.correct){
+score++;
+}
+
+nextBtn.style.display="block";
+
+};
+
+answersEl.appendChild(btn);
+
+});
+
+}
+
+nextBtn.onclick = ()=>{
+
+currentQuestion++;
+
+if(currentQuestion < quiz.length){
+
+loadQuestion();
+
+}else{
+
+document.querySelector(".quiz-box").innerHTML =
+"<h1>ඔබගේ ලකුණු: " + score + "/" + quiz.length + "</h1>";
+
+}
+
+};
+
+loadQuestion();
+
 </script>
 
 </body>
 </html>
-```
-
-## කොහොමද Run කරන්නෙ?
-
-1. Notepad Open කරන්න
-2. මේ Code එක Copy කරන්න
-3. `index.html` කියලා Save කරන්න
-4. File එක Double Click කරන්න
-
-## Free Publish කරන විදිහ
-
-* Netlify
-* GitHub Pages
-
-වලට upload කරලා online website එකක් විදිහට use කරන්න පුලුවන්.
